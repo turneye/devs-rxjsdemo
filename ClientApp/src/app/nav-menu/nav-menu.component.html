@@ -28,6 +28,11 @@
                     </a>
                 </li>
                 <li [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
+                    <a [routerLink]='["/intro"]' (click)='collapse()'>
+                        <span class='glyphicon glyphicon-home'></span> Intro
+                    </a>
+                </li>
+                <li [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
                     <a [routerLink]='["/basic"]' (click)='collapse()'>
                         <span class='glyphicon glyphicon-home'></span> Basic
                     </a>

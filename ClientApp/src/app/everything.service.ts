@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, BehaviorSubject } from 'rxjs';
+import { Observable, of, BehaviorSubject, interval } from 'rxjs';
 import {
   tap,
   debounceTime,
   distinctUntilChanged,
   switchMap,
   filter,
-  map
+  map,
+  delay
 } from 'rxjs/operators';
 
 @Injectable({
@@ -39,7 +40,9 @@ export class EverythingService {
   }
 
   getUsers() {
-    return this.http.get<User[]>('https://jsonplaceholder.typicode.com/users');
+    // force it to take 2 seconds
+    return this.http.get<User[]>('https://jsonplaceholder.typicode.com/users') .pipe(delay(1000));
+    // .pipe(delay(1000));
     // .pipe(tap(x => console.log(x)));
   }
 

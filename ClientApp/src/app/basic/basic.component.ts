@@ -14,6 +14,7 @@ export class BasicComponent implements OnInit {
   totals$: Observable<Totals>;
   total: Totals = { total: 0, complete: 0};
 
+
   searchTerm$ = new Subject<string>();
   users$: Observable<User[]>;
 
@@ -31,14 +32,14 @@ export class BasicComponent implements OnInit {
 
     // USERS
     // 1 - basic
-     this.users$ = this.service.getUsers();
+    // this.users$ = this.service.getUsers();
 
     // 2 - just give me the top 3. take
     // this.users$ = this.service.getUsers().pipe(take(3));  // hmmm ..... why doesn't this work??
     // this.users$ = this.service.getUsers().pipe(mergeAll(), take(3), toArray()); // .subscribe(val => console.log('Next: ' + val.name));
 
     // 3 - searching with debounce, etc
-    // this.users$ = this.service.searchUsers(this.searchTerm$);
+    this.users$ = this.service.searchUsers(this.searchTerm$);
   }
 
   totalItems() {}
