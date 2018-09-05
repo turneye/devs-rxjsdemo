@@ -1,0 +1,63 @@
+<h1>TODO</h1>
+<div class="row">
+  <div class="col-md-6">
+    <a class="btn btn-default" (click)="newItem()">Push Something</a>
+  </div>
+  <div class="col-md-6">
+    <table>
+      <thead>
+        <tr>
+          <th>
+            Item
+          </th>
+          <th>
+            Done
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of items$ | async">
+          <td>
+            <div>{{item.title}}</div>
+            <small>{{item.description}}</small>
+            <br/>
+          </td>
+          <td></td>
+          <td> <input type="checkbox" (click)="toggleItem(item)" [checked]="item.complete"></td>
+        </tr>
+      </tbody>
+    </table>
+    TOTAL : {{(totals$ | async)?.total}}   DONE : {{(totals$ | async)?.complete}}
+  </div>
+</div>
+<hr>
+<h1>Users</h1>
+<div class="row">
+  <div class="col-md-6">
+    <input type="search" (keyup)="searchTerm$.next($event.target.value)" />
+  </div>
+  <div class="col-md-6">
+    <table>
+      <thead>
+        <tr>
+          <th>
+            Name
+          </th>
+          <th>
+            Email
+          </th>
+          <th>
+            Company
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let u of users$ | async">
+          <td>{{u.name}}</td>
+          <td>{{u.email}}</td>
+          <td>{{u.company.name}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
