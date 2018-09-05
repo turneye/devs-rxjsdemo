@@ -26,10 +26,12 @@ export class BasicComponent implements OnInit {
         total: tot.total += 1,
         complete: tot.complete += (itm.done ? 1 : 0)
       };
-    }, { total: 0, complete: 0 }), tap(info => console.log(info))));
+    }, { total: 0, complete: 0 })));
 
+
+    // USERS
     // 1 - basic
-    // this.users$ = this.service.getUsers();
+     this.users$ = this.service.getUsers();
 
     // 2 - just give me the top 3. take
     // this.users$ = this.service.getUsers().pipe(take(3));  // hmmm ..... why doesn't this work??
