@@ -41,16 +41,17 @@ export class EverythingService {
 
   getUsers() {
     // force it to take 2 seconds
-    return this.http.get<User[]>('https://jsonplaceholder.typicode.com/users') .pipe(delay(1000));
-    // .pipe(delay(1000));
+    return this.http.get<User[]>('https://jsonplaceholder.typicode.com/users');
     // .pipe(tap(x => console.log(x)));
   }
 
   searchUsers(search: Observable<string>) {
     return search.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
       switchMap(term =>
         this.getUsers().pipe(
-          map(usr => usr.filter(x => x.name.indexOf(term) >= 0))
+          map(usr => usr.filter(x => x.name.toLowerCase().indexOf(term.toLowerCase()) >= 0))
         )
       )
     );

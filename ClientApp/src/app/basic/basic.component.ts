@@ -35,7 +35,7 @@ export class BasicComponent implements OnInit {
     // this.users$ = this.service.getUsers();
 
     // 2 - just give me the top 3. take
-    // this.users$ = this.service.getUsers().pipe(take(3));  // hmmm ..... why doesn't this work??
+    // this.users$ = this.service.getUsers().pipe(mergeAll(), take(3), toArray());  // hmmm ..... why doesn't this work??
     // this.users$ = this.service.getUsers().pipe(mergeAll(), take(3), toArray()); // .subscribe(val => console.log('Next: ' + val.name));
 
     // 3 - searching with debounce, etc

@@ -1,7 +1,7 @@
-import { mergeAll, map, filter, groupBy, mergeMap, toArray, take, concat, merge } from 'rxjs/operators';
+import { mergeAll, map, filter, groupBy, mergeMap, toArray, take, concat, merge, tap, zipAll } from 'rxjs/operators';
 import { EverythingService } from './../everything.service';
 import { Component, OnInit } from '@angular/core';
-import { Observable, of, interval } from 'rxjs';
+import { Observable, of, interval, zip } from 'rxjs';
 
 
 @Component({
@@ -21,13 +21,19 @@ export class IntroComponent implements OnInit {
   ngOnInit() {
     // JSON DATA
     // this.service.getUsers()
-    //   .pipe(mergeAll(),
-    //   )
+    //   .pipe(
+    //     mergeAll(),
+    //     filter(u => u.website.endsWith('com')),
+    //     tap(u => u.website = 'http://' + u.website),
+    //     map(u => u.website)
+    // )
     //   .subscribe(data => {
-    //     this._logs.push(data);
+    //     this._logs.push(JSON.stringify(data));
     //   });
-
-
+  
+      // this.slowSource.pipe(zipAll(this.fasterSource)).subscribe(data => {
+      //   this._logs.push(JSON.stringify(data));
+      // });
   }
 
 }
@@ -44,15 +50,17 @@ export class IntroComponent implements OnInit {
         mergeMap(group => group.pipe(map(x => JSON.stringify(x.website)), toArray()))
 
 
-            this.slowSource.pipe(merge(this.fasterSource))
+  //merge
+    this.slowSource.pipe(merge(this.fasterSource))
     .subscribe(data => {
       this._logs.push(data);
     });
 
-    // this.slowSource.pipe(concat(this.fasterSource))
-    //   .subscribe(data => {
-    //     this._logs.push(data);
-    //   });
+    //concat
+    this.slowSource.pipe(concat(this.fasterSource))
+      .subscribe(data => {
+        this._logs.push(data);
+      });
 
 
 */
